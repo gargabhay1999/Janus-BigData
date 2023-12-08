@@ -8,3 +8,4 @@ Tasks:
 - [ ] user types source and destination on front end
 - [ ] GET API -> backend => {routes with risk score, distance and time}
 - [ ] front end part
+- [ ] architecture diagram ![Alt text](sample-architecure-diagram.png)

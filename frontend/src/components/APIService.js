@@ -6,7 +6,7 @@ export default class APIService {
             return
         }
         const queryParams = new URLSearchParams({ source, destination }).toString();
-        return fetch(`http://127.0.0.1:5000/get-routes-risk-score?${queryParams}`, {
+        return fetch(`${process.env.REACT_APP_JANUS_API_HOST}/get-routes-risk-score?${queryParams}`, {
             'method': 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -21,7 +21,7 @@ export default class APIService {
             return
         }
         const queryParams = new URLSearchParams({ source, destination }).toString();
-        return fetch(`http://127.0.0.1:5000/get-safest-route?${queryParams}`, {
+        return fetch(`${process.env.REACT_APP_JANUS_API_HOST}/get-safest-route?${queryParams}`, {
             'method': 'GET',
             headers: {
                 'Content-Type': 'application/json'

@@ -26,25 +26,6 @@ const Adreess = () => {
         })
   };
 
-//   return (
-//     <div>
-//         <form onSubmit={handleSubmit}>
-//         <label>
-//             From:
-//             <input type="text" value={from} onChange={(e) => setFrom(e.target.value)} />
-//         </label>
-//         <br/>
-//         <label>
-//             To: <input type="text" value={to} onChange={(e) => setTo(e.target.value)} />
-//         </label>
-//         <br/> 
-//         <button type="submit" className="btn btn-success mt-3"> Get Route</button>
-//         </form>
-//         <br /> <br />
-//         {show && route && <MapView route={route} />}
-//     </div>
-//   );
-
 return (
     <div>
         <Container className="mt-5">

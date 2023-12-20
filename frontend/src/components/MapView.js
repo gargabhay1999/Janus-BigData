@@ -59,9 +59,7 @@ const MapView = ({ route }) => {
                 {mapCenter && route ?
                     (
                         <div>
-                            <p>Risk Score: {route.risk_score}</p>
-                            <p>Distance: {route.distance}</p> 
-                            <p>Time: {route.time}</p> 
+                            <p>Risk Score: {route.risk_score} | Distance: {route.distance} | Time: {route.time}</p> 
                         </div>
                     ) : null }
             </div>

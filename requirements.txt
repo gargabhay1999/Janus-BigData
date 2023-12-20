@@ -1,0 +1,17 @@
+aniso8601==9.0.1
+certifi==2021.10.8
+chardet==4.0.0
+click==7.1.2
+Flask==1.1.4
+Flask-RESTful==0.3.10
+googlemaps==4.2.0
+idna==2.10
+itsdangerous==1.1.0
+Jinja2==2.11.3
+MarkupSafe==1.1.1
+pymongo==3.13.0
+pytz==2023.3.post1
+requests==2.27.1
+six==1.16.0
+urllib3==1.26.18
+Werkzeug==1.0.1

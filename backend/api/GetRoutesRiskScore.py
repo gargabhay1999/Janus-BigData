@@ -7,7 +7,7 @@ min_latitude, max_latitude = 40.49, 62.08
 min_longitude, max_longitude = -74.26, -73.68
 
 # Number of divisions along each axis to create 1,000,000 zones (1000x1000)
-num_divisions = 500
+num_divisions = 5000
 
 lat_step = (max_latitude - min_latitude) / num_divisions
 lon_step = (max_longitude - min_longitude) / num_divisions
@@ -129,6 +129,7 @@ class GetRoutesRiskScore(Resource):
   
   def identify_routes_risk_score(self, all_routes_data):
     zone_risk_df = self.spark.read.option("header", "false").csv("zone_risk.csv")
+    zone_risk_df = zone_risk_df.dropna()
     rows = zone_risk_df.collect()
     # Converting rows to dictionary
     zone_risk_dict = {int(row[0]): float(row[1]) for row in rows}

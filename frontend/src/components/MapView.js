@@ -63,7 +63,7 @@ const MapView = ({ route }) => {
                         </div>
                     ) : null }
             </div>
-            <div style={{ height: '400px', width: '100%' }}>
+            <div style={{ height: '650px', width: '100%' }}>
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
                     defaultCenter={mapCenter}

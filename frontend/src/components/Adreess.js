@@ -5,18 +5,18 @@ import MapView from './MapView';
 const Adreess = () => {
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
-  const [routes, setRoutes] =  useState(null);
+  const [route, setRoute] =  useState(null);
   const [show, setShow] = useState(false);
 
   useEffect(() => {
     setShow(false);
   }, [from, to]);
-
+  
   const handleSubmit = (event) => {
     event.preventDefault();
-    APIService.GetRoutesWithRiskScore(from, to)
+    APIService.GetSafestRoute(from, to)
         .then(resp => {
-            setRoutes(resp.routes);
+            setRoute(resp.route);
             setShow(true);
         })
         .catch(error => {
@@ -49,7 +49,7 @@ const Adreess = () => {
         <button type="submit" className="btn btn-success mt-3"> Get Route</button>
         </form>
         <br /> <br />
-        {show && routes && <MapView routes={routes} />}
+        {show && route && <MapView route={route} />}
     </div>
   );
 };

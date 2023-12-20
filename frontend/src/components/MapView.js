@@ -1,51 +1,34 @@
 import React, { useState, useEffect, useRef } from 'react';
 import GoogleMapReact from 'google-map-react';
 
-const MapView = ({ routes }) => {
+const MapView = ({ route }) => {
     const [mapCenter, setMapCenter] = useState(null);
-    // const [key, setKey] = useState(Date.now());
     const mapRef = useRef();
     const mapsRef = useRef();
     const directionsRendererRef = useRef();
 
-    // Function to find the route with the least risk score
-    const getLeastRiskRoute = (routes) => { 
-        let leastRiskRoute = null;
-        let minRiskScore = Number.MAX_VALUE;
-
-        Object.values(routes).forEach(route => {
-            if (route.risk_score < minRiskScore) {
-                minRiskScore = route.risk_score;
-                leastRiskRoute = route;
-            }
-        });
-        return leastRiskRoute;
-    };
-
-    const routeToDisplay = getLeastRiskRoute(routes);
-
     useEffect(() => {
-        if (routeToDisplay && routeToDisplay.Coordinate && routeToDisplay.Coordinate.length > 0) {
-            const firstCoord = routeToDisplay.Coordinate[0];
+        if (route && route.Coordinate && route.Coordinate.length > 0) {
+            const firstCoord = route.Coordinate[0];
             setMapCenter({ lat: firstCoord.lat, lng: firstCoord.long });
         }
-    }, [routeToDisplay]);
+    }, [route]);
 
 
     useEffect(() => {
-        console.log(mapRef.current, mapsRef.current, routeToDisplay, mapCenter)
-        if (mapRef.current && mapsRef.current && routeToDisplay && mapCenter && directionsRendererRef.current) {
+        console.log(mapRef.current, mapsRef.current, route, mapCenter)
+        if (mapRef.current && mapsRef.current && route && mapCenter && directionsRendererRef.current) {
             const directionsService = new mapsRef.current.DirectionsService();
             const directionsRenderer = new mapsRef.current.DirectionsRenderer();
             directionsRenderer.setMap(mapRef.current);
 
-            const waypoints = routeToDisplay.Coordinate.slice(1, -1).map(coord => ({
+            const waypoints = route.Coordinate.slice(1, -1).map(coord => ({
                 location: new mapsRef.current.LatLng(coord.lat, coord.long),
                 stopover: true
             }));
 
-            const origin = routeToDisplay.Coordinate[0];
-            const destination = routeToDisplay.Coordinate[routeToDisplay.Coordinate.length - 1];
+            const origin = route.Coordinate[0];
+            const destination = route.Coordinate[route.Coordinate.length - 1];
 
             const request = {
                 origin: new mapsRef.current.LatLng(origin.lat, origin.long),
@@ -62,7 +45,7 @@ const MapView = ({ routes }) => {
                 }
             });
         }
-    }, [routeToDisplay, mapCenter]);
+    }, [route, mapCenter]);
 
     if (!mapCenter) return null; // Don't render the map until the center is set
 
@@ -70,12 +53,12 @@ const MapView = ({ routes }) => {
     return (
         <div>
             <div>
-                {mapCenter && routeToDisplay ?
+                {mapCenter && route ?
                     (
                         <div>
-                            <p>Risk Score: {routeToDisplay.risk_score}</p>
-                            <p>Distance: {routeToDisplay.distance}</p> 
-                            <p>Time: {routeToDisplay.time}</p> 
+                            <p>Risk Score: {route.risk_score}</p>
+                            <p>Distance: {route.distance}</p> 
+                            <p>Time: {route.time}</p> 
                         </div>
                     ) : null }
             </div>

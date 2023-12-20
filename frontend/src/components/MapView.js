@@ -27,6 +27,10 @@ const MapView = ({ route }) => {
                 stopover: true
             }));
 
+            if (waypoints.length>25) {
+                alert("please choose small distance addresses.")
+            }
+
             const origin = route.Coordinate[0];
             const destination = route.Coordinate[route.Coordinate.length - 1];
 
@@ -47,8 +51,7 @@ const MapView = ({ route }) => {
         }
     }, [route, mapCenter]);
 
-    if (!mapCenter) return null; // Don't render the map until the center is set
-
+    if (!mapCenter) return null;
 
     return (
         <div>
@@ -64,8 +67,7 @@ const MapView = ({ route }) => {
             </div>
             <div style={{ height: '400px', width: '100%' }}>
                 <GoogleMapReact
-                    // key={key} // Use key for reinitialization
-                    bootstrapURLKeys={{ key: 'AIzaSyDx7Qa2hpuHNUVjSmesZOc32WhcdRHSWTw' }}
+                    bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
                     defaultCenter={mapCenter}
                     defaultZoom={12}
                     yesIWantToUseGoogleMapApiInternals

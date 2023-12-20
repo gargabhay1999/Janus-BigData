@@ -22,5 +22,6 @@ api = Api(app)
 def serve(path):
     return send_from_directory(app.static_folder,'index.html')
 
-api.add_resource(GetRoutesRiskScore, '/get-routes-risk-score', resource_class_args=[spark])
+api.add_resource(GetRoutesRiskScore, '/get-routes-risk-score', resource_class_args=[spark], endpoint='get_routes_risk_score')
+api.add_resource(GetRoutesRiskScore, '/get-safest-route', resource_class_args=[spark], endpoint='get_safest_route')
 api.add_resource(HelloApiHandler, '/flask/hello')

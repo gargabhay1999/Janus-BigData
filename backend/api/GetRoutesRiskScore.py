@@ -20,18 +20,49 @@ class GetRoutesRiskScore(Resource):
   def get(self):
     with open("./../api_key.txt", 'r') as file:
       api_key = file.readline()
-    print(api_key)
-    source_address = "Latourette Park"#request.args.get('source_address')
-    destination_address = "New Springville"#request.args.get('destination_address')
 
-    all_routes_data = self.get_all_routes_with_coordinates(api_key, source_address, destination_address)
+    source = request.args.get('source')
+    destination = request.args.get('destination')
+
+    # source = "Latourette Park"
+    # destination = "New Springville"
+
+    all_routes_data = self.get_all_routes_with_coordinates(api_key, source, destination)
     data = self.identify_routes_risk_score(all_routes_data)
-  
-    return {
-      'status': 'SUCCESS',
-      'message': "GetRoutesRiskScore Api Handler",
-      'routes': data
-    }
+
+    print(source, destination)
+
+    current_path = request.path
+    if current_path == '/get-routes-risk-score':
+        return {
+          'status': 'SUCCESS',
+          'message': "GetRoutesRiskScore Api Handler",
+          'routes': data
+        }
+    elif current_path == '/get-safest-route':
+        return {
+          'status': 'SUCCESS',
+          'message': "GetRoutesRiskScore Api Handler",
+          'route': self.find_least_risk_route(data)
+        }
+        # return (self.find_least_risk_route(data))
+
+  @staticmethod
+  def find_least_risk_route(routes_data):
+    # Initialize variables to keep track of the least risky route
+    least_risk_route = None
+    min_risk_score = float('inf')
+
+    # Iterate through each route in the data
+    for route_id, route_info in routes_data.items():
+        # Compare the risk score of the current route with the minimum risk score found so far
+        if route_info['risk_score'] < min_risk_score:
+            min_risk_score = route_info['risk_score']
+            least_risk_route = route_id
+
+    # Return the route with the least risk score
+    return routes_data[least_risk_route] if least_risk_route is not None else None
+    
   
   @staticmethod
   def get_all_routes_with_coordinates(api_key, origin, destination):

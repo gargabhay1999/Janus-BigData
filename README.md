@@ -8,9 +8,17 @@ Tasks:
 - [x] user types source and destination on front end
 - [x] GET API -> backend => {routes with risk score, distance and time}
 - [x] front end part
-- [ ] architecture diagram ![Alt text](sample-architecure-diagram.png)
+- [x] architecture diagram ![Architecture Diagram](Architechure-Diagram.jpeg)
 
 Step to run project-
+Run Flask App:
 1. cd backend
 2. python -m venv venv
-2. source venv/bin/activate
+3. source venv/bin/activate
+4. Install Flask, flask_restful, flask_cors, googlemaps libraries using pip install
+5. run the command: "flask run" to run the flask app.
+
+Run React-Native App:
+1. open another terminal and cd to frontend
+2. npm install
+3. npm start

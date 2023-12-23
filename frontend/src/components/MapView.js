@@ -29,6 +29,7 @@ const MapView = ({ route }) => {
 
             if (waypoints.length>25) {
                 alert("please choose small distance addresses.")
+                return
             }
 
             const origin = route.Coordinate[0];
